@@ -1,0 +1,16 @@
+image:
+  repository: yourdockerhub/app
+  tag: v1
+
+replicaCount: 2
+
+version: blue
+
+service:
+  name: bluegreen-app
+  type: LoadBalancer
+  port: 80
+
+ingress:
+  enabled: true
+  host: app.example.com

@@ -1,0 +1,4 @@
+apiVersion: v2
+name: bluegreen-app
+description: Blue-Green Deployment Helm Chart
+version: 0.1.0
