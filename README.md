@@ -21,23 +21,6 @@ Users → Ingress → [ 🔵 Blue (v1) ]  ← traffic before switch
 - Instant rollback if something goes wrong
 - Safe way to test v2 before exposing it to users
 
----
-
-## Architecture
-                    ┌─────────────────────────────┐
-                    │         AWS EKS Cluster      │
-                    │                              │
-Internet ──▶ ELB ──▶ NGINX Ingress ──▶ Service (selector: version=blue/green)
-│                    │
-│         ┌──────────┴──────────┐
-│         │                     │
-│   🔵 Blue Pods (v1)    🟢 Green Pods (v2)
-│   Deployment              Deployment
-└─────────────────────────────┘
-
-Traffic switching happens at the **Service selector level** — no pod restarts, no downtime.
-
----
 
 ## Prerequisites
 
@@ -94,23 +77,6 @@ eksctl create cluster \
 ```
 
 > ⚠️ Cluster creation takes 10–15 minutes.
-
----
-
-## Project Structure
-.
-├── bluegreen-app/           # Helm chart for the application
-│   ├── Chart.yaml
-│   ├── values.yaml          # Default values (blue, v1)
-│   └── templates/
-│       ├── deployment.yaml
-│       ├── service.yaml
-│       └── ingress.yaml
-├── app/                     # Application source code
-│   └── Dockerfile
-└── README.md
-
----
 
 ## Step-by-Step Deployment Guide
 
